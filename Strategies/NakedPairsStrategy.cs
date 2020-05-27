@@ -66,7 +66,7 @@ namespace SudokuSolver.Strategies
         {
             if (!HasNakedPairInCol(sudokuBoard, givenRow, givenCol)) return;
 
-            for (int row = 0; row < sudokuBoard.GetLength(1); row++)
+            for (int row = 0; row < sudokuBoard.GetLength(0); row++)
             {
                 if (sudokuBoard[row, givenCol] != sudokuBoard[givenRow, givenCol] && sudokuBoard[row, givenCol].ToString().Length > 1)
                 {
@@ -77,7 +77,7 @@ namespace SudokuSolver.Strategies
 
         private bool HasNakedPairInCol(int[,] sudokuBoard, int givenRow, int givenCol)
         {
-            for (int row = 0; row < sudokuBoard.GetLength(1); row++)
+            for (int row = 0; row < sudokuBoard.GetLength(0); row++)
             {
                 if (givenRow != row && IsNakedPair(sudokuBoard[row, givenCol], sudokuBoard[givenRow, givenCol])) return true;
             }
@@ -91,9 +91,9 @@ namespace SudokuSolver.Strategies
 
             var sudokuMap = _sudokuMapper.Find(givenRow, givenCol);
 
-            for (int row = sudokuMap.StartRow; row < sudokuMap.StartRow + 2; row++)
+            for (int row = sudokuMap.StartRow; row <= sudokuMap.StartRow + 2; row++)
             {
-                for (int col = sudokuMap.StartCol; col < sudokuMap.StartCol + 2; col++)
+                for (int col = sudokuMap.StartCol; col <= sudokuMap.StartCol + 2; col++)
                 {
                    if (sudokuBoard[row, col].ToString().Length > 1 && sudokuBoard[row, col] != sudokuBoard[givenRow, givenCol])
                     {
@@ -114,7 +114,7 @@ namespace SudokuSolver.Strategies
                     var elementInSameBlock = _sudokuMapper.Find(givenRow, givenCol).StartRow == _sudokuMapper.Find(row, col).StartRow &&
                         _sudokuMapper.Find(givenRow, givenCol).StartCol == _sudokuMapper.Find(row, col).StartCol;
 
-                    if (!elementSame && elementInSameBlock && !IsNakedPair(sudokuBoard[givenRow, givenCol], sudokuBoard[row, col])) return true;
+                    if (!elementSame && elementInSameBlock && IsNakedPair(sudokuBoard[givenRow, givenCol], sudokuBoard[row, col])) return true;
                 }
             }
 
