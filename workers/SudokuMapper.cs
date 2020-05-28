@@ -9,7 +9,7 @@ namespace SudokuSolver.workers
         {
             SudokuMap sudokuMap = new SudokuMap();
 
-            if (( givenRow >= 0 && givenRow <= 2 ) && (givenCol >= 0 && givenCol <= 2))
+            if ((givenRow >= 0 && givenRow <= 2) && (givenCol >= 0 && givenCol <= 2))
             {
                 sudokuMap.StartRow = 0;
                 sudokuMap.StartCol = 0;
@@ -39,11 +39,6 @@ namespace SudokuSolver.workers
                 sudokuMap.StartRow = 3;
                 sudokuMap.StartCol = 6;
             }
-            else if ((givenRow >= 0 && givenRow <= 2) && (givenCol >= 0 && givenCol <= 2))
-            {
-                sudokuMap.StartRow = 0;
-                sudokuMap.StartCol = 0;
-            }
             else if ((givenRow >= 6 && givenRow <= 8) && (givenCol >= 0 && givenCol <= 2))
             {
                 sudokuMap.StartRow = 6;
@@ -54,12 +49,11 @@ namespace SudokuSolver.workers
                 sudokuMap.StartRow = 6;
                 sudokuMap.StartCol = 3;
             }
-            else if ((givenRow >= 6 && givenRow <= 8) && (givenCol >= 6 && givenCol <= 6))
+            else if ((givenRow >= 6 && givenRow <= 8) && (givenCol >= 6 && givenCol <= 8))
             {
                 sudokuMap.StartRow = 6;
                 sudokuMap.StartCol = 6;
             }
-
 
             return sudokuMap;
         }

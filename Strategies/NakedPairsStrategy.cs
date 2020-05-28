@@ -3,7 +3,7 @@ using SudokuSolver.workers;
 
 namespace SudokuSolver.Strategies
 {
-    public class NakedPairsStrategy : ISudokuStragedy
+    public class NakedPairsStrategy : ISudokuStrategy
     {
         private readonly SudokuMapper _sudokuMapper;
 

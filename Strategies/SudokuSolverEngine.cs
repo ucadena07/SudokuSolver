@@ -14,27 +14,25 @@ namespace SudokuSolver.Strategies
         {
             _sudokuBoardStateManager = sudokuBoardStateManager;
             _sudokuMapper = sudokuMapper;
-
         }
 
-        public bool Solve(int[,] sudokuBoard) 
+        public bool Solve(int[,] sudokuBoard)
         {
-            List<ISudokuStragedy> stragedies = new List<ISudokuStragedy>()
+            List<ISudokuStrategy> strategies = new List<ISudokuStrategy>()
             {
-
+                new SimpleMarkUpStrategy(_sudokuMapper),
+                new NakedPairsStrategy(_sudokuMapper)
             };
 
             var currentState = _sudokuBoardStateManager.GenerateState(sudokuBoard);
-            var nextState = _sudokuBoardStateManager.GenerateState(stragedies.First().Solve(sudokuBoard));
+            var nextState = _sudokuBoardStateManager.GenerateState(strategies.First().Solve(sudokuBoard));
 
             while (!_sudokuBoardStateManager.IsSolved(sudokuBoard) && currentState != nextState)
             {
                 currentState = nextState;
-                foreach (var strategy in stragedies)
-                {
-                    nextState = _sudokuBoardStateManager.GenerateState(strategy.Solve(sudokuBoard));
-                }
+                foreach (var strategy in strategies) nextState = _sudokuBoardStateManager.GenerateState(strategy.Solve(sudokuBoard));
             }
+
             return _sudokuBoardStateManager.IsSolved(sudokuBoard);
         }
     }
